@@ -1,7 +1,7 @@
 # Dashboard
 
 ## Plot 1
-![one](/../plots/predicted_rates.png)
+![one](../plots/predicted_rates.png)
 
 ## Plot 2
 ![two](image2.png)
