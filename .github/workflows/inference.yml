@@ -28,5 +28,11 @@ jobs:
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}  # Replace with your actual secret name
         run: python inference.py
+
+      - name: Upload plots artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: plots
+          path: plots/
         
       
