@@ -1,4 +1,4 @@
-name: Update VIX Feature Group
+name: Update features
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-vix:
+  update:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,3 +38,8 @@ jobs:
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}  # Replace with your actual secret name
         run: python update_bzf.py
+      
+      - name: Run update SEK to USD script
+        env:
+          HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}  # Replace with your actual secret name
+        run: python update_sek_to_usd.py
