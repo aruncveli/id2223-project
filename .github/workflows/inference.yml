@@ -7,8 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
+
   update:
     runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      contents: write
 
     steps:
       - name: Checkout repository
