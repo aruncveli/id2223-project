@@ -23,6 +23,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install "hopsworks[python]" yfinance pandas
+          pip install tensorflow
 
       - name: Run inference script
         env:
