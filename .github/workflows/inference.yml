@@ -2,8 +2,7 @@ name: Inference
 
 on:
   schedule:
-    # Run daily at midnight UTC
-    - cron: "0 2 * * *"
+    - cron: "0 21 * * *"
   workflow_dispatch:
 
 jobs:
