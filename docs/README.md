@@ -1,10 +1,11 @@
 # Dashboard
 
-## Plot 1
-![one](../plots/predicted_rates.png)
+## Predicted rates
+![](predicted_rates.png)
 
-## Plot 2
-![two](image2.png)
+## Comparison of actual and predicted rates
+### 1 day
+![](1_day_actual_vs_prediction.png)
 
-## Plot 3
-![three](image3.png)
+### 7 days
+![](7_day_actual_vs_prediction.png)

@@ -92,8 +92,7 @@ import matplotlib.pyplot as plt
 import os
 
 # Directory to save the plot
-plot_dir = "plots"
-os.makedirs(plot_dir, exist_ok=True)
+plot_dir = "docs"
 
 # Create the plot
 plt.figure(figsize=(8, 6))
@@ -150,8 +149,6 @@ plt.legend()
 plt.grid()
 
 # Save the plot
-plot_dir = "plots"
-os.makedirs(plot_dir, exist_ok=True)
 plot_path = os.path.join(plot_dir, "1_day_actual_vs_prediction.png")
 plt.savefig(plot_path)
 plt.show()
@@ -193,8 +190,6 @@ plt.legend()
 plt.grid()
 
 # Save the plot
-plot_dir = "plots"
-os.makedirs(plot_dir, exist_ok=True)
 plot_path = os.path.join(plot_dir, "7_day_actual_vs_prediction.png")
 plt.savefig(plot_path)
 plt.show()
