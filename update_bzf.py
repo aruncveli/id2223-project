@@ -8,9 +8,6 @@ def fetch_latest_bzf():
     today = datetime.utcnow().date()
     next_trading_day = today + timedelta(days=1)
 
-    while last_trading_day.weekday() > 4:  # Skip weekends (Saturday=5, Sunday=6)
-        last_trading_day -= timedelta(days=1)
-
     bzf = yf.download("BZ=F", start=today.strftime("%Y-%m-%d"), end=next_trading_day.strftime("%Y-%m-%d") , interval="1d")
 
     if bzf.empty:
