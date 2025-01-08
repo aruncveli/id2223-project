@@ -8,9 +8,6 @@ def fetch_latest_sek_to_usd():
     today = datetime.utcnow().date()
     start_trading_day = today + timedelta(days=1)
 
-    while last_trading_day.weekday() > 4:  # Skip weekends (Saturday=5, Sunday=6)
-        last_trading_day -= timedelta(days=1)
-
     sek_to_usd = yf.download("SEK=X", start=today.strftime("%Y-%m-%d"), end=start_trading_day.strftime("%Y-%m-%d"), interval="1d")
 
     if sek_to_usd.empty:
