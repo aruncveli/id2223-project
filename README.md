@@ -17,7 +17,7 @@ This project leverages historical financial data, including a few economic indic
 indices, to train and validate a Long Short-Term Memory (LSTM) neural network model. The model is designed to predict
 the exchange rate for upto the next seven days, providing valuable insights into future currency movements. By utilizing
 hyperparameter tuning and sequence modeling, this project aims to achieve high prediction accuracy and reliability. The
-results are visualized using a [static dashboard](https://aruncveli.github.io/id2223-project/) hosted at GitHub pages,
+results are visualized using a [static dashboard](https://aruncveli.github.io/id2223-project/) hosted on GitHub pages,
 intending to offer a comprehensive view of the generated insights.
 
 ## Data
@@ -31,7 +31,7 @@ and can have a potential impact on the exchange rate, namely:
    Options Exchange's CBOE Volatility Index, a popular measure of the stock market's expectation of volatility based on
    S&P 500 index options. Since the exchange rate is against USD.
 2. [OMX Stockholm 30](https://www.nasdaq.com/european-market-activity/indexes/omxs30) (OMX): Index of the 30 most-traded
-   stock on the Nasdaq Stockholm stock exchange. Since the most prominent stock index in Sweden.
+   stocks on the Nasdaq Stockholm stock exchange. Since the most prominent stock index in Sweden.
 3. [Brent Index](https://www.ice.com/futures-europe/brent) (BZ=F): Specifically Brent Last Day Financial Futures, a
    derivative product based on the crude oil
    production from the North Sea (Northwest Europe). Since it is the geographically nearest index which can affect
@@ -55,9 +55,34 @@ Every day at 20:00 UTC, the latest available Close prices are fetched from Yahoo
 Hopsworks feature groups. The
 pipeline was implemented as a Python script and orchestrated using GitHub Actions with the Hopsworks Python SDK.
 
+```mermaid
+graph LR
+    subgraph fg[Feature Groups]
+        SEK
+        VIX
+        OMX
+        BZ
+    end
+    yf[Yahoo Finance] --> SEK
+    yf --> VIX
+    yf --> OMX
+    yf --> BZ
+```
+
 ### Training
 
 The data from the four feature groups was combined into a single feature view, joining the tables by primary key `date`.
+
+```mermaid
+graph LR
+    subgraph fgs[Feature Groups]
+        SEK
+        VIX
+        OMX
+        BZ
+    end
+    fgs -- Join by date --> fv[Feature View]
+```
 
 For employing some cross validation, the data was split into subsets as follows:
 
@@ -68,14 +93,20 @@ For employing some cross validation, the data was split into subsets as follows:
 For each datapoint, a 30-day window of historical data was considered as the sequence to train/validate/predict.
 
 Since we planned to model this as a time series forecasting problem, we chose to employ
-a [Keras powered LSTM neural network](https://keras.io/api/layers/recurrent_layers/lstm/) as the algorithm. Cascading
-multiple LSTM layers using the Keras API, the final
-architecture schematic looks like this:
+a [Keras powered long short-term memory recurrent neural network](https://keras.io/api/layers/recurrent_layers/lstm/) (
+LSTM RNN) as the algorithm. Cascading multiple LSTM layers using the Keras API, the final training schematic looks
+like this:
 
 ```mermaid
 graph LR
-    lstm1[LSTM 1] --> dropout1[Dropout 1] --> lstm2[LSTM 2] --> dropout2[Dropout 2] --> Dense
+    subgraph Bidirectional
+        lstm1[LSTM 1]
+    end
+    Bidirectional --> dropout1[Dropout 1] --> lstm2[LSTM 2] --> dropout2[Dropout 2] --> Dense
 ```
+
+The first LSTM layer is bidirectional, enabling it to learn about the input sequence both forward and backward. This can
+be useful in learning long-term dependencies in the data. The dropout layers are used to prevent overfitting.
 
 The following hyperparameters:
 
