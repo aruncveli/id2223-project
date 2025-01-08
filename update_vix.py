@@ -5,8 +5,8 @@ import pandas as pd
 
 # Function to fetch today's VIX data
 def fetch_latest_vix():
-    today = datetime.utcnow().date() - timedelta(days=1)
-    last_trading_day = today - timedelta(days=2)
+    today = datetime.utcnow().date()
+    last_trading_day = today - timedelta(days=1)
 
     while last_trading_day.weekday() > 4:  # Skip weekends (Saturday=5, Sunday=6)
         last_trading_day -= timedelta(days=1)
