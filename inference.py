@@ -112,14 +112,10 @@ plt.xlabel("Day Ahead")
 plt.ylabel("Predicted Rate")
 plt.xticks(days, [f"Day+{d}" for d in days])
 
-# Annotate exact values on each point
-for i, val in enumerate(predicted_7_days):
-    plt.text(days[i], val + 0.02, f"{val:.4f}", ha="center", va="bottom")
-
 plt.grid(linestyle="--", alpha=0.7)
 
 # Save & show
-plot_dir = "plots"
+plot_dir = "docs"
 os.makedirs(plot_dir, exist_ok=True)
 plot_file = os.path.join(plot_dir, "predicted_rates_7days_line.png")
 plt.savefig(plot_file, dpi=300, bbox_inches="tight")
