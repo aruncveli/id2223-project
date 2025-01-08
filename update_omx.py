@@ -6,12 +6,12 @@ import pandas as pd
 # Function to fetch today's OMX data
 def fetch_latest_omx():
     today = datetime.utcnow().date()
-    last_trading_day = today - timedelta(days=1)
+    start_trading_day = today + timedelta(days=1)
 
     while last_trading_day.weekday() > 4:  # Skip weekends (Saturday=5, Sunday=6)
         last_trading_day -= timedelta(days=1)
 
-    omx = yf.download("^OMX", start=last_trading_day.strftime("%Y-%m-%d"), end=today.strftime("%Y-%m-%d"), interval="1d")
+    omx = yf.download("^OMX", start=today.strftime("%Y-%m-%d"), end=start_trading_day.strftime("%Y-%m-%d"), interval="1d")
 
     if omx.empty:
         print(f"No new data available for OMX. Checked for {last_trading_day}.")
