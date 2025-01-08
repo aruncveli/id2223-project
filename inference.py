@@ -17,6 +17,7 @@ data.sort_values(by='date', inplace=True)
 # Select the last 30 rows to form your input sequence
 latest_30_df = data.tail(30).copy()
 latest_30_df = latest_30_df.fillna(method='ffill')  # fill forward if there are NaNs
+latest_30_df = latest_30_df.fillna(method='bfill')  # fill backward if there are NaNs
 
 print("Latest 30 rows:\n", latest_30_df.head(30))
 
