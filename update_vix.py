@@ -8,9 +8,6 @@ def fetch_latest_vix():
     today = datetime.utcnow().date()
     start_trading_day = today + timedelta(days=1)
 
-    while last_trading_day.weekday() > 4:  # Skip weekends (Saturday=5, Sunday=6)
-        last_trading_day -= timedelta(days=1)
-
     vix = yf.download("^VIX", start=today.strftime("%Y-%m-%d"), end=start_trading_day.strftime("%Y-%m-%d"), interval="1d")
 
     if vix.empty:
