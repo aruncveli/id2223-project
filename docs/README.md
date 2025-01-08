@@ -1,7 +1,7 @@
 # Dashboard
 
 ## Predicted rates
-![](predicted_rates.png)
+![](predicted_rates_7days_line.png)
 
 ## Comparison of actual and predicted rates
 ### 1 day
